@@ -1,5 +1,23 @@
 # Simple Distributed Master-Worker Paradigm
 
+To run:
+- Install python3
+- Run the scripts providing necessary parameters
+
+OR
+
+./run-w-tmux
+
+## Decisions
+
+We don't return error when any single worker node is down, rather we only return the results we get from the available worker nodes.
+
+Results are wrapped in list for each node that responds, so the client can easily infer how many nodes responded without having to parse some error.
+
+## In Action
+
+![alt text](image.png)
+
 ## Prompt
 
 In this assignment, we will program and build a distributed master-worker paradigm for distributed execution of tasks and answering queries. In that setup, we have one or more client programs (hereafter "client") communicate with a "master" process and pass their queries to the master. The query here refers to a client asking about an individual person by their name and other attributes. In that, the system stores information about an individual's name, residence location, and year of residence in a "data table" (similar to the one shown in class). A sample data record looks like the following indexed by name in a dictionary:

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Name of the tmux session
+SESSION_NAME="python_logs"
+
+# List of Python scripts
+PYTHON_SCRIPTS=("leader.py 23000" "worker-skeleton.py 23001 am" "worker-skeleton.py 23002 nz" "client.py 23000")
+
+# Start a new detached tmux session
+tmux new-session -d -s $SESSION_NAME
+
+# Split into four panes
+tmux split-window -h  # Split horizontally
+tmux split-window -v  # Split bottom left vertically
+tmux select-pane -t 0
+tmux split-window -v  # Split top left vertically
+
+# Run each script in a separate pane
+for i in {0..3}; do
+    tmux select-pane -t $i
+    tmux send-keys "python3 ${PYTHON_SCRIPTS[$i]}" C-m
+done
+
+# Attach to the tmux session
+tmux attach-session -t $SESSION_NAME

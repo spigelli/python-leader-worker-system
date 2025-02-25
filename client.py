@@ -1,6 +1,8 @@
 import xmlrpc.client
 import sys
+from time import sleep
 
+sleep(1)
 master_port = int(sys.argv[1])
 with xmlrpc.client.ServerProxy(f"http://localhost:{master_port}/") as proxy:
     name = 'xander'
